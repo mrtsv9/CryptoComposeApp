@@ -24,8 +24,8 @@ class MainViewModel : ViewModel() {
 
     fun gelAllCrypto() {
         viewModelScope.launch {
-            val cryptos = api.getCryptos()
-            _cryptoLiveData.postValue(cryptos.map { it.toCryptoItem() })
+            val cryptos = api.getCryptos().map { it.toCryptoItem() }
+            _cryptoLiveData.postValue(cryptos)
         }
     }
 

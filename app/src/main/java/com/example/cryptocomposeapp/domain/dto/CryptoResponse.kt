@@ -2,6 +2,7 @@ package com.example.cryptocomposeapp.domain.dto
 
 import com.example.cryptocomposeapp.ui.item.CryptoItem
 import com.google.gson.annotations.SerializedName
+import java.math.RoundingMode
 
 data class CryptoResponse (
     var id: String,
@@ -20,6 +21,15 @@ data class CryptoResponse (
 )
 
 fun CryptoResponse.toCryptoItem(): CryptoItem {
+    price = if (price.toFloat() >= 100000000) {
+        price.dropLast(6).plus(" B")
+    }
+    else if (price.toFloat() >= 1) {
+        price.plus(" $")
+    } else {
+        val decimal = price.toBigDecimal().setScale(5, RoundingMode.HALF_EVEN)
+        decimal.toString().plus(" $")
+    }
     return CryptoItem(
         id = id,
         abbr = abbr,

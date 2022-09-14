@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalCoilApi::class)
+
 package com.example.cryptocomposeapp
 
 import android.os.Bundle
@@ -19,6 +21,7 @@ import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -30,10 +33,11 @@ import androidx.compose.ui.semantics.Role.Companion.Image
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.annotation.ExperimentalCoilApi
+import coil.compose.rememberImagePainter
 import com.example.cryptocomposeapp.ui.item.CryptoItem
 import com.example.cryptocomposeapp.ui.main_screen.MainViewModel
 import com.example.cryptocomposeapp.ui.theme.CryptoComposeAppTheme
-
 
 class MainActivity : ComponentActivity() {
     private val viewModel: MainViewModel by viewModels()
@@ -57,25 +61,6 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun ClickableColumnDemo(selectedItem: (String) -> Unit) {
-    LazyColumn {
-        items(100)
-        {
-            Text(
-                "User Name ${it + 1}",
-                style = MaterialTheme.typography.h3,
-                modifier = Modifier
-                    .padding(10.dp)
-                    .clickable {
-                        selectedItem("$it is selected")
-                    }
-            )
-            Divider(color = Color.Black, thickness = 4.dp)
-        }
-    }
-}
-
-@Composable
 fun CryptoList(list: List<CryptoItem>, selectedItem: (CryptoItem) -> Unit) {
 
     val cryptoList = remember {
@@ -91,16 +76,15 @@ fun CryptoList(list: List<CryptoItem>, selectedItem: (CryptoItem) -> Unit) {
     }
 }
 
-
 @Composable
 fun CryptoImage(item: CryptoItem) {
     Image(
-        painter = painterResource(id = R.drawable.ic_bitcoin48),
-        contentDescription = null,
-        contentScale = ContentScale.Crop,
+        painter = rememberImagePainter(item.imageLink),
+        contentDescription = item.title,
+        contentScale = ContentScale.Fit,
         modifier = Modifier
-            .height(48.dp)
-            .width(48.dp)
+            .height(64.dp)
+            .width(64.dp)
             .clip(RoundedCornerShape(corner = CornerSize(10.dp)))
     )
 }
@@ -109,46 +93,38 @@ fun CryptoImage(item: CryptoItem) {
 fun CryptoListItem(item: CryptoItem, clickListener: (CryptoItem) -> Unit) {
     Card(
         modifier = Modifier
-            .height(IntrinsicSize.Max)
-            .padding(16.dp),
-        elevation = 8.dp,
+            .height(120.dp)
+            .padding(horizontal = 12.dp, vertical = 8.dp),
+        elevation = 12.dp,
         shape = RoundedCornerShape(corner = CornerSize(12.dp))
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .fillMaxHeight()
-                .background(Color.LightGray)
+                .padding(horizontal = 12.dp)
                 .clickable { clickListener(item) },
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            CryptoImage(item = item)
-            Spacer(modifier = Modifier.width(12.dp))
 
-            Column(
-                modifier = Modifier
-                    .fillMaxHeight()
-                    .width(IntrinsicSize.Min),
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                CryptoImage(item = item)
+                Spacer(modifier = Modifier.width(16.dp))
 
-                verticalArrangement = Arrangement.SpaceBetween,
-                horizontalAlignment = Alignment.Start
-            ) {
-                Text(text = item.abbr.toString(), fontSize = 18.sp)
-                Text(text = item.title.toString(), fontSize = 14.sp)
+                Column(
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .width(IntrinsicSize.Min),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.Start
+                ) {
+                    Text(text = item.abbr.toString(), fontSize = 24.sp)
+                    Text(text = item.title.toString(), fontSize = 16.sp)
+                }
             }
 
-            Spacer(modifier = Modifier.width(160.dp))
-
-            Column(
-                modifier = Modifier
-                    .fillMaxHeight()
-                    .background(Color.Cyan)
-                    .width(IntrinsicSize.Max),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.End,
-            ) {
-                Text(text = item.price.toString().plus(" $"), fontSize = 18.sp)
-            }
+            Text(text = item.price.toString(), fontSize = 24.sp)
         }
     }
 }
