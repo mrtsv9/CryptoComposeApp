@@ -1,4 +1,6 @@
-package com.example.cryptocomposeapp.ui.item
+package com.example.cryptocomposeapp.ui.main_screen.items
+
+import java.io.Serializable
 
 data class CryptoItem(
     val id: String?,
@@ -8,4 +10,4 @@ data class CryptoItem(
     val price: String?,
     var marketCap: String?,
     var priceChange: String?
-)
+): Serializable
