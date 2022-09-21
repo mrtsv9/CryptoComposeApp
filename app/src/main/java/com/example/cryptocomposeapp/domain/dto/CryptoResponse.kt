@@ -1,6 +1,6 @@
 package com.example.cryptocomposeapp.domain.dto
 
-import com.example.cryptocomposeapp.ui.main_screen.items.CryptoItem
+import com.example.cryptocomposeapp.presentation.main_screen.items.CryptoItem
 import com.google.gson.annotations.SerializedName
 import java.math.RoundingMode
 

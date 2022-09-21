@@ -1,4 +1,4 @@
-package com.example.cryptocomposeapp.ui.main_screen.items
+package com.example.cryptocomposeapp.presentation.main_screen.items
 
 import java.io.Serializable
 

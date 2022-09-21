@@ -1,7 +1,7 @@
 package com.example.cryptocomposeapp.di
 
 import com.example.cryptocomposeapp.domain.service.ApiService
-import com.example.cryptocomposeapp.ui.main_screen.MainRepository
+import com.example.cryptocomposeapp.presentation.main_screen.MainRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

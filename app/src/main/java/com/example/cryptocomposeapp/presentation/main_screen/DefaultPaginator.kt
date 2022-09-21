@@ -1,4 +1,4 @@
-package com.example.cryptocomposeapp.ui.main_screen
+package com.example.cryptocomposeapp.presentation.main_screen
 
 class DefaultPaginator<Key, Item>(
     private val initialKey: Key,

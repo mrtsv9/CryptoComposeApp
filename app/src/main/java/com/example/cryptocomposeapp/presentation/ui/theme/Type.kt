@@ -1,4 +1,4 @@
-package com.example.cryptocomposeapp.ui.theme
+package com.example.cryptocomposeapp.presentation.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle

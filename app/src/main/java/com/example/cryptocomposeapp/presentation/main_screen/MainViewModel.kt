@@ -1,14 +1,16 @@
-package com.example.cryptocomposeapp.ui.main_screen
+package com.example.cryptocomposeapp.presentation.main_screen
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.cryptocomposeapp.ui.main_screen.items.CryptoItem
+import com.example.cryptocomposeapp.presentation.main_screen.items.CryptoItem
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class MainViewModel @Inject constructor(private val repository: MainRepository) : ViewModel() {
 
     var state by mutableStateOf(ScreenState())

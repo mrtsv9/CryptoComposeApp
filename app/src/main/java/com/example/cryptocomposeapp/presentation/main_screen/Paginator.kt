@@ -1,4 +1,4 @@
-package com.example.cryptocomposeapp.ui.main_screen
+package com.example.cryptocomposeapp.presentation.main_screen
 
 interface Paginator<Key, Item> {
     suspend fun loadNextItems()
