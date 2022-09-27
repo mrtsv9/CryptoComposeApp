@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.cryptocomposeapp.domain.dto.CryptoChartData
 import com.example.cryptocomposeapp.presentation.details_screen.item.ChartParams
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -16,11 +17,14 @@ class DetailsViewModel @Inject constructor(private val repository: DetailsReposi
     val chartId = MutableStateFlow("")
     val chartDays = MutableStateFlow("")
 
+    val progressBarState = MutableStateFlow(true)
+
     val chartData = MutableStateFlow(CryptoChartData(emptyList()))
 
     init {
         viewModelScope.launch {
             chartDays.collect {
+                progressBarState.value = true
                 getCryptoChartData(chartId.value, it)
             }
         }
@@ -29,6 +33,7 @@ class DetailsViewModel @Inject constructor(private val repository: DetailsReposi
 
     private suspend fun getCryptoChartData(id: String, days: String) {
         repository.getCryptoChartData(id, days).data.let {
+            progressBarState.value = false
             if (it != null) {
                 chartData.value = it
             }

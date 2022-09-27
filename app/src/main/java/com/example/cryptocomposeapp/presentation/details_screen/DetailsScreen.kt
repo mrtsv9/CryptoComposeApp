@@ -25,7 +25,7 @@ fun DetailsScreen(
 ) {
 
     remember {
-        viewModel.chartId.value = title
+        viewModel.chartId.value = id
         true
     }
 
@@ -61,7 +61,7 @@ fun DetailsScreen(
                     title = title)
                 Column(horizontalAlignment = Alignment.Start,
                     verticalArrangement = Arrangement.Center) {
-                    Text(text = id, fontSize = 26.sp)
+                    Text(text = title, fontSize = 26.sp)
                     Spacer(modifier = Modifier.height(12.dp))
                     Text(text = price, fontSize = 26.sp)
                     Spacer(modifier = Modifier.height(12.dp))

@@ -53,8 +53,8 @@ class MainActivity : ComponentActivity() {
                         }
                     )
                 ) {
-                    val title = it.arguments?.getString("id")!!
-                    val id = it.arguments?.getString("title")!!
+                    val id = it.arguments?.getString("id")!!
+                    val title = it.arguments?.getString("title")!!
                     val price = it.arguments?.getString("price")!!
                     val priceChange = it.arguments?.getString("priceChange")!!
                     val marketCap = it.arguments?.getString("marketCap")!!

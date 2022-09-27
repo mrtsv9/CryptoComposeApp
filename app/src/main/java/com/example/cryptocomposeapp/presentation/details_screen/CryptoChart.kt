@@ -6,6 +6,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.material.Card
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Divider
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
@@ -22,6 +23,8 @@ fun LinearCryptoChart(
     modifier: Modifier,
     viewModel: DetailsViewModel,
 ) {
+
+    val progressBarStatus by viewModel.progressBarState.collectAsState()
 
     val cryptoChartData by viewModel.chartData.collectAsState()
     remember {
@@ -58,26 +61,35 @@ fun LinearCryptoChart(
             .fillMaxHeight()
             .width(1.dp), color = Color.Gray)
 
-        Canvas(modifier = modifier) {
-            val totalCryptosCount = chartData.size
+        if (progressBarStatus) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                CircularProgressIndicator(color = Color.Green)
+            }
+        } else
+            Canvas(modifier = modifier) {
+                val totalCryptosCount = chartData.size
 
-            chartData.forEachIndexed { index, _ ->
-                if (totalCryptosCount >= index + 2) {
-                    drawLine(
-                        start = Offset(
-                            x = size.width / totalCryptosCount * (index + 1),
-                            y = (1 - (chartData[index] - minY) / yAxis) * size.height
-                        ),
-                        end = Offset(
-                            x = size.width / totalCryptosCount * (index + 2),
-                            y = (1 - (chartData[index + 1] - minY) / yAxis) * size.height
-                        ),
-                        color = Color(40, 193, 218),
-                        strokeWidth = 4f
-                    )
+                chartData.forEachIndexed { index, _ ->
+                    if (totalCryptosCount >= index + 2) {
+                        drawLine(
+                            start = Offset(
+                                x = size.width / totalCryptosCount * (index + 1),
+                                y = (1 - (chartData[index] - minY) / yAxis) * size.height
+                            ),
+                            end = Offset(
+                                x = size.width / totalCryptosCount * (index + 2),
+                                y = (1 - (chartData[index + 1] - minY) / yAxis) * size.height
+                            ),
+                            color = Color(40, 193, 218),
+                            strokeWidth = 4f
+                        )
+                    }
                 }
             }
-        }
     }
 
     Spacer(modifier = Modifier.height(12.dp))
