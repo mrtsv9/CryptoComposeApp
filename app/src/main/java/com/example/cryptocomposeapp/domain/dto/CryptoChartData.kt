@@ -1,5 +1,5 @@
 package com.example.cryptocomposeapp.domain.dto
 
-data class CryptoDetailsResponse(
+data class CryptoChartData(
     val prices: List<List<Float>>
 )

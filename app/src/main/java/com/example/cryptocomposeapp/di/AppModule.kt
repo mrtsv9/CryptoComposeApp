@@ -1,6 +1,7 @@
 package com.example.cryptocomposeapp.di
 
 import com.example.cryptocomposeapp.domain.service.ApiService
+import com.example.cryptocomposeapp.presentation.details_screen.DetailsRepository
 import com.example.cryptocomposeapp.presentation.main_screen.MainRepository
 import dagger.Module
 import dagger.Provides
@@ -15,5 +16,10 @@ object AppModule {
     @Provides
     @Singleton
     fun provideMainRepository(apiService: ApiService): MainRepository = MainRepository(apiService)
+
+    @Provides
+    @Singleton
+    fun provideDetailsRepository(apiService: ApiService): DetailsRepository =
+        DetailsRepository(apiService)
 
 }

@@ -13,7 +13,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(private val repository: MainRepository) : ViewModel() {
 
-    var state by mutableStateOf(ScreenState())
+    var state by mutableStateOf(MainScreenState())
 
     private val paginator = DefaultPaginator(
         initialKey = state.page,
@@ -50,7 +50,7 @@ class MainViewModel @Inject constructor(private val repository: MainRepository) 
 
 }
 
-data class ScreenState(
+data class MainScreenState(
     val isLoading: Boolean = false,
     val items: List<CryptoItem> = emptyList(),
     val error: String? = null,

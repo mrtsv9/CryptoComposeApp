@@ -1,8 +1,8 @@
 package com.example.cryptocomposeapp.domain.service
 
-import com.example.cryptocomposeapp.domain.dto.CryptoDetailsResponse
+import com.example.cryptocomposeapp.domain.dto.CryptoChartData
 import com.example.cryptocomposeapp.domain.dto.CryptoResponse
-import retrofit2.Response
+import com.example.cryptocomposeapp.util.Resource
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -18,9 +18,9 @@ interface ApiService {
     ): List<CryptoResponse>
 
     @GET("coins/{id}/market_chart?vs_currency=usd")
-    suspend fun getDetailCrypto(
+    suspend fun getCryptoChartData(
         @Path("id") id: String,
         @Query("days") days: String
-    ): CryptoDetailsResponse
+    ): CryptoChartData
 
 }

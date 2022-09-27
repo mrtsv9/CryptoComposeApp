@@ -1,7 +1,6 @@
-@file:OptIn(ExperimentalCoilApi::class)
-
 package com.example.cryptocomposeapp.presentation.main_screen
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -21,8 +20,10 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
+import com.example.cryptocomposeapp.presentation.base.ImageItem
 import com.example.cryptocomposeapp.presentation.main_screen.items.CryptoItem
 import com.example.cryptocomposeapp.presentation.ui.theme.Shapes
+import com.example.cryptocomposeapp.util.Constants.DEBUG_TAG
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
 
@@ -52,7 +53,7 @@ fun CryptoListScreen(
                         val encodedUrl =
                             URLEncoder.encode(item.imageLink, StandardCharsets.UTF_8.toString())
                         navController.navigate(
-                            "cryptoDetails/${item.title}/" +
+                            "cryptoDetails/${item.id}/${item.title}/" +
                                     "${item.price}/${item.priceChange}/" +
                                     "${item.marketCap}/${encodedUrl}"
                         )
@@ -95,21 +96,3 @@ fun CryptoListScreen(
         }
     }
 }
-
-@Composable
-fun ImageItem(
-    url: String,
-    modifier: Modifier = Modifier,
-    title: String = "Title"
-) {
-    Image(
-        painter = rememberImagePainter(url),
-        contentDescription = title,
-        contentScale = ContentScale.Fit,
-        modifier = modifier
-            .height(64.dp)
-            .width(64.dp)
-            .clip(Shapes.large)
-    )
-}
-

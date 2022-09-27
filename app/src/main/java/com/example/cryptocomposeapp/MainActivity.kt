@@ -31,8 +31,11 @@ class MainActivity : ComponentActivity() {
                     CryptoListScreen(navController = navController)
                 }
                 composable(
-                    route = "cryptoDetails/{title}/{price}/{priceChange}/{marketCap}/{imageLink}",
+                    route = "cryptoDetails/{id}/{title}/{price}/{priceChange}/{marketCap}/{imageLink}",
                     arguments = listOf(
+                        navArgument("id") {
+                            type = NavType.StringType
+                        },
                         navArgument("title") {
                             type = NavType.StringType
                         },
@@ -50,13 +53,15 @@ class MainActivity : ComponentActivity() {
                         }
                     )
                 ) {
-                    val title = it.arguments?.getString("title")!!
+                    val title = it.arguments?.getString("id")!!
+                    val id = it.arguments?.getString("title")!!
                     val price = it.arguments?.getString("price")!!
                     val priceChange = it.arguments?.getString("priceChange")!!
                     val marketCap = it.arguments?.getString("marketCap")!!
                     val imageLink = it.arguments?.getString("imageLink")!!
 
                     DetailsScreen(
+                        id = id,
                         title = title,
                         price = price,
                         priceChange = priceChange,

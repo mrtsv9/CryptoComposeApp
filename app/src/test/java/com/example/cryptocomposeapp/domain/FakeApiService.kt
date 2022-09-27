@@ -1,11 +1,8 @@
 package com.example.cryptocomposeapp.domain
 
-import com.example.cryptocomposeapp.domain.dto.CryptoDetailsResponse
 import com.example.cryptocomposeapp.domain.dto.CryptoResponse
 import retrofit2.Response
 import retrofit2.http.GET
-import retrofit2.http.Path
-import retrofit2.http.Query
 
 interface FakeApiService {
 
