@@ -3,9 +3,7 @@ package com.example.cryptocomposeapp.presentation.details_screen
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cryptocomposeapp.domain.dto.CryptoChartData
-import com.example.cryptocomposeapp.presentation.details_screen.item.ChartParams
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject

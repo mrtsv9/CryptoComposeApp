@@ -8,12 +8,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import coil.annotation.ExperimentalCoilApi
 import com.example.cryptocomposeapp.presentation.details_screen.DetailsScreen
 import com.example.cryptocomposeapp.presentation.main_screen.CryptoListScreen
-import com.example.cryptocomposeapp.presentation.main_screen.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -74,6 +71,3 @@ class MainActivity : ComponentActivity() {
     }
 
 }
-
-
-

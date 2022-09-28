@@ -17,6 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.cryptocomposeapp.presentation.ui.theme.Shapes
+import com.example.cryptocomposeapp.util.toChartAxisValue
 
 @Composable
 fun LinearCryptoChart(
@@ -53,8 +54,8 @@ fun LinearCryptoChart(
             modifier = Modifier.fillMaxHeight(),
             verticalArrangement = Arrangement.SpaceBetween
         ) {
-            Text(maxY.toInt().toString().plus(" $"), fontSize = 12.sp)
-            Text(minY.toInt().toString().plus(" $"), fontSize = 12.sp)
+            Text(maxY.toChartAxisValue().plus(" $"), fontSize = 12.sp)
+            Text(minY.toChartAxisValue().plus(" $"), fontSize = 12.sp)
         }
 
         Divider(modifier = Modifier
@@ -109,15 +110,15 @@ fun LinearCryptoChart(
             .wrapContentHeight(),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        radioOptions.forEach {
+        radioOptions.forEach { days ->
             SelectableButton(
-                days = it,
-                isSelectedOption = selectedOption == it,
+                days = days,
+                isSelectedOption = selectedOption == days,
                 onSelectOption = { selectedDay ->
                     if (selectedDay == selectedOption) {
                         onOptionSelected("")
                     } else {
-                        viewModel.chartDays.value = mapDaysToRequestParams(it)
+                        viewModel.chartDays.value = mapDaysToRequestParams(days)
                         onOptionSelected(selectedDay)
                     }
                 })
