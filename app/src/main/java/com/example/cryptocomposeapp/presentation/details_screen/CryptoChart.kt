@@ -3,6 +3,7 @@ package com.example.cryptocomposeapp.presentation.details_screen
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.material.Card
@@ -116,7 +117,7 @@ fun LinearCryptoChart(
                 isSelectedOption = selectedOption == days,
                 onSelectOption = { selectedDay ->
                     if (selectedDay == selectedOption) {
-                        onOptionSelected("")
+                        onOptionSelected(selectedDay)
                     } else {
                         viewModel.chartDays.value = mapDaysToRequestParams(days)
                         onOptionSelected(selectedDay)
@@ -157,14 +158,17 @@ fun SelectableButton(
         modifier = Modifier
             .width(44.dp)
             .height(32.dp)
-            .clickable {
+            .clickable(interactionSource = remember {
+                MutableInteractionSource()
+            }, indication = null) {
                 onSelectOption(days)
             },
         shape = Shapes.large
     ) {
         Row(horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.background(checkboxResource(isSelected = isSelectedOption))) {
+            modifier = Modifier
+                .background(checkboxResource(isSelected = isSelectedOption))) {
             Text(
                 text = days,
                 fontSize = 18.sp)
